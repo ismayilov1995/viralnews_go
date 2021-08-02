@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fiber_news/models"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -40,4 +41,15 @@ func (u *UserController) Delete(c *fiber.Ctx) error {
 	} else {
 		return c.JSON(fiber.Map{"message": msg})
 	}
+}
+
+func (u *UserController) Seed(c *fiber.Ctx) error {
+	var user models.User
+	return c.JSON(user.Seed())
+}
+
+func (u *UserController) Reset(c *fiber.Ctx) error {
+	var user models.User
+	user.Reset()
+	return c.JSON(fiber.Map{"message": "sdfd"})
 }

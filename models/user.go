@@ -2,6 +2,8 @@ package models
 
 import (
 	"fiber_news/utils"
+	"fmt"
+
 	"gorm.io/gorm"
 )
 
@@ -41,4 +43,21 @@ func (u *User) Delete(id interface{}) (string, error) {
 	}
 	utils.DbConn.Delete(&u)
 	return "user deleted", nil
+}
+
+func (u *User) Seed() *[]User {
+	var users []User
+	for i := 0; i < 20; i++ {
+		users = append(users, User{
+			FullName: fmt.Sprintf("Dummy User %v", i),
+			Email:    fmt.Sprintf("dummy%v@gmail.com", i),
+			Password: "7090698"})
+	}
+	utils.DbConn.Create(&users)
+	return &users
+}
+
+func (u *User) Reset() bool {
+	utils.DbConn.Where("id IS NOT NULL").Delete(&u)
+	return true
 }
