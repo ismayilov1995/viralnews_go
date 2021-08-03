@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	htmlt "github.com/gofiber/template/html"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -47,19 +48,17 @@ func resetDB() {
 }
 
 func main() {
-	app := fiber.New()
+	engine := htmlt.New("./views", ".html")
+	app := fiber.New(fiber.Config{Views: engine})
 	initDB()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	routers.StaticRouters(app)
+	routers.ApiRouters(app)
 
 	app.Get("/reset", func(c *fiber.Ctx) error {
 		resetDB()
 		return c.SendString("db is rested")
 	})
-
-	routers.ApiRouters(app)
 
 	port := "3000"
 	if os.Getenv("PORT") != "" {
