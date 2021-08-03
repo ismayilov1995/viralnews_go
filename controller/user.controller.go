@@ -51,5 +51,5 @@ func (u *UserController) Seed(c *fiber.Ctx) error {
 func (u *UserController) Reset(c *fiber.Ctx) error {
 	var user models.User
 	user.Reset()
-	return c.JSON(fiber.Map{"message": "sdfd"})
+	return c.JSON(fiber.Map{"message": "removed"})
 }

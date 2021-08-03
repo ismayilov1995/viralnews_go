@@ -3,6 +3,7 @@ package models
 import (
 	"fiber_news/utils"
 	"fmt"
+
 	"gorm.io/gorm"
 )
 
@@ -12,7 +13,7 @@ type News struct {
 	Content   string `gorm:"not null"`
 	Thumbnail string
 	AuthorID  int
-	Author    User
+	Author    User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Read      int
 }
 
@@ -39,4 +40,28 @@ func (n *News) Load(id interface{}) *News {
 		fmt.Println(err)
 	}
 	return n
+}
+
+func (n *News) Delete(id interface{}) (string, error) {
+	utils.DbConn.Find(&n, id)
+	if err := utils.DbConn.Delete(&n); err != nil {
+		return "", err.Error
+	}
+	return "news is removed", nil
+}
+
+func (n *News) Seed() *[]News {
+	var news []News
+	for i := 0; i < 20; i++ {
+		news = append(news, News{
+			Title:    fmt.Sprintf("This is dummy title %v", i),
+			Content:  fmt.Sprintf("This is content %v", i),
+			AuthorID: 1})
+	}
+	utils.DbConn.Create(&news)
+	return &news
+}
+
+func (n *News) Reset() {
+	utils.DbConn.Where("id IS NOT NULL").Delete(&n)
 }

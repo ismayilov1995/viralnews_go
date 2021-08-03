@@ -57,7 +57,6 @@ func (u *User) Seed() *[]User {
 	return &users
 }
 
-func (u *User) Reset() bool {
+func (u *User) Reset() {
 	utils.DbConn.Where("id IS NOT NULL").Delete(&u)
-	return true
 }
