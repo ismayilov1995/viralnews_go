@@ -41,13 +41,15 @@ func (u *User) Delete(id interface{}) (string, error) {
 	if err := utils.DbConn.First(&u, id).Error; err != nil {
 		return "", err
 	}
+	// utils.DbConn.Exec("DELETE FROM users WHERE id=?", id)
 	utils.DbConn.Delete(&u)
+	utils.DbConn.Where("author_id", u.ID).Delete(&News{})
 	return "user deleted", nil
 }
 
 func (u *User) Seed() *[]User {
 	var users []User
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 10; i++ {
 		users = append(users, User{
 			FullName: fmt.Sprintf("Dummy User %v", i),
 			Email:    fmt.Sprintf("dummy%v@gmail.com", i),

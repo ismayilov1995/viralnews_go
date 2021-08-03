@@ -27,7 +27,11 @@ func (n *NewsController) LoadAll(c *fiber.Ctx) error {
 
 func (n *NewsController) Load(c *fiber.Ctx) error {
 	news := new(models.News)
-	return c.JSON(news.Load(c.Params("id")))
+	if newses, err := news.Load(c.Params("id")); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	} else {
+		return c.JSON(newses)
+	}
 }
 
 func (u *NewsController) Delete(c *fiber.Ctx) error {

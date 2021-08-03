@@ -61,7 +61,11 @@ func main() {
 
 	routers.ApiRouters(app)
 
-	if err := app.Listen(":3000"); err != nil {
+	port := "3000"
+	if os.Getenv("PORT") != "" {
+		port = os.Getenv("PORT")
+	}
+	if err := app.Listen(":" + port); err != nil {
 		log.Panicf("server not started")
 	}
 }

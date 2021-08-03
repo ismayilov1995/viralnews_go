@@ -33,13 +33,13 @@ func (n *News) LoadAll() []News {
 	return news
 }
 
-func (n *News) Load(id interface{}) *News {
+func (n *News) Load(id interface{}) (*News, error) {
 	utils.DbConn.Find(&n, id)
 	err := utils.DbConn.Model(n).Association("Author").Find(&n.Author)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
-	return n
+	return n, nil
 }
 
 func (n *News) Delete(id interface{}) (string, error) {
@@ -52,11 +52,11 @@ func (n *News) Delete(id interface{}) (string, error) {
 
 func (n *News) Seed() *[]News {
 	var news []News
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 10; i++ {
 		news = append(news, News{
 			Title:    fmt.Sprintf("This is dummy title %v", i),
 			Content:  fmt.Sprintf("This is content %v", i),
-			AuthorID: 1})
+			AuthorID: i + 1})
 	}
 	utils.DbConn.Create(&news)
 	return &news
