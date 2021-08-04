@@ -9,7 +9,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	htmlt "github.com/gofiber/template/html"
+	"github.com/gofiber/template/pug"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -48,7 +48,7 @@ func resetDB() {
 }
 
 func main() {
-	engine := htmlt.New("./views", ".html")
+	engine := pug.New("./views", ".pug")
 	app := fiber.New(fiber.Config{Views: engine})
 	initDB()
 
