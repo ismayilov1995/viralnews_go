@@ -2,14 +2,15 @@
 <hr>
 <h1>{{Title}}</h1>
 
-<ul>
+<div class="grid">
   {{#each Newses}}
-    <li>
-      <a href="/news/"{{this.ID}}>{{this.Title}}</a>
+    <div class="news-card">
+      <a href="/news/{{this.ID}}">{{this.Title}}</a>
       <p>{{this.Content}}</p>
       <small>{{this.Author.FullName}} - {{this.Author.Email}}</small>
-    </li>
+      <code>{{this.Author.Email}}</code>
+    </div>
   {{/each}}
-</ul>
+</div>
 
 {{> 'partials/footer'}}
