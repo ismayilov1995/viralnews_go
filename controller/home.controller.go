@@ -13,7 +13,7 @@ func (u *HomeController) Home(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{
 		"Title":  "Hello Popo",
 		"Newses": news.LoadAll(),
-	})
+	}, "layouts/main")
 }
 
 func (u *HomeController) NewsPage(c *fiber.Ctx) error {
@@ -21,7 +21,7 @@ func (u *HomeController) NewsPage(c *fiber.Ctx) error {
 	if news, err := news.Load(c.Params("id")); err != nil {
 		return c.SendString("Go fuck urself")
 	} else {
-		return c.Render("about", fiber.Map{
+		return c.Render("index", fiber.Map{
 			"Title": "News",
 			"News":  news,
 		})

@@ -1,21 +1,15 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>{{Title}}</h1>
+{{> 'partials/header'}}
 
-    <ul>
-      {{#each Newses}}
-        <li>
-          {{this.Title}}
-          <p>{{this.Content}}</p>
-          <small>{{this.Author.FullName}} - {{this.Author.Email}}</small>
-        </li>
-      {{/each}}
-    </ul>
-  </body>
-</html>
+<h1>{{Title}}</h1>
+
+<ul>
+  {{#each Newses}}
+    <li>
+      {{this.Title}}
+      <p>{{this.Content}}</p>
+      <small>{{this.Author.FullName}} - {{this.Author.Email}}</small>
+    </li>
+  {{/each}}
+</ul>
+
+{{> 'partials/footer'}}
