@@ -1,11 +1,11 @@
 {{> 'partials/header'}}
-
+<hr>
 <h1>{{Title}}</h1>
 
 <ul>
   {{#each Newses}}
     <li>
-      {{this.Title}}
+      <a href="#">{{this.Title}}</a>
       <p>{{this.Content}}</p>
       <small>{{this.Author.FullName}} - {{this.Author.Email}}</small>
     </li>

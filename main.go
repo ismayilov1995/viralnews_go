@@ -51,7 +51,7 @@ func main() {
 	engine := handlebars.New("./views", ".hbs")
 	app := fiber.New(fiber.Config{Views: engine})
 	initDB()
-
+	app.Static("/", ",.public")
 	routers.StaticRouters(app)
 	routers.ApiRouters(app)
 
