@@ -21,8 +21,8 @@ func (u *HomeController) NewsPage(c *fiber.Ctx) error {
 	if news, err := news.Load(c.Params("id")); err != nil {
 		return c.SendString("Go fuck urself")
 	} else {
-		return c.Render("index", fiber.Map{
-			"Title": "News",
+		return c.Render("news", fiber.Map{
+			"Title": news.Title,
 			"News":  news,
 		})
 	}

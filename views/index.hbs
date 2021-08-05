@@ -5,7 +5,7 @@
 <ul>
   {{#each Newses}}
     <li>
-      <a href="#">{{this.Title}}</a>
+      <a href="/news/"{{this.ID}}>{{this.Title}}</a>
       <p>{{this.Content}}</p>
       <small>{{this.Author.FullName}} - {{this.Author.Email}}</small>
     </li>
