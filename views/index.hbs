@@ -1,16 +1,16 @@
 {{> 'partials/header'}}
 <hr>
-<h1>{{Title}}</h1>
 
-<div class="grid">
+<main class="container">
+<div class="grid grid-cols-4 gap-4 py-4">
   {{#each Newses}}
-    <div class="news-card">
-      <a href="/news/{{this.ID}}">{{this.Title}}</a>
+    <div class="border rounded p-2">
+      <a class="text-blue-500" href="/news/{{this.ID}}">{{this.Title}}</a>
       <p>{{this.Content}}</p>
       <small>{{this.Author.FullName}} - {{this.Author.Email}}</small>
       <code>{{this.Author.Email}}</code>
     </div>
   {{/each}}
 </div>
-
+</main>
 {{> 'partials/footer'}}

@@ -1,0 +1,11 @@
+{{> 'partials/header'}}
+<hr>
+<main class="container py-4">
+  <form class="flex flex-col space-y-4" method="POST" action="/news/create">
+    <input class="border outline-none p-2" name="title" type="text" placeholder="Title">
+    <textarea class="border outline-none p-2" name="content" type="text" placeholder="Content"></textarea>
+    <i class="text-gray-400 text-sm">{{Author.FullName}}</i>
+    <button class="bg-red-400 rounded text-white px-4 py-2 hover:bg-red-600">Create</button>
+  </form>
+</main>
+{{> 'partials/footer'}}
